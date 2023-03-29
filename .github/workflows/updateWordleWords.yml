@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    runs-on: macos-latest
     steps:
     - name: Remove wordle words
       run: rm wordleWords.csv
