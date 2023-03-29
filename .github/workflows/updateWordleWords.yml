@@ -10,8 +10,10 @@ jobs:
     steps:
     - name: change dir
       run: cd ..
-    - name: Print dir
+    - name: Print dir 1
       run: ls -a
+    - name: Print dir 2
+      run: pwd
     - name: Remove wordle words
       run: rm wordleWords.csv
     - name: Remove repeat letter
