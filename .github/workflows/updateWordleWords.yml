@@ -9,7 +9,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Print dir
-      run: ls -a
+      run: pwd
     - name: Remove wordle words
       run: rm wordleWords.csv
     - name: Remove repeat letter
