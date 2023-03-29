@@ -8,8 +8,9 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-    - name: Remove wordle words
+    - name: Print dir
       run: ls -a
+    - name: Remove wordle words
       run: rm wordleWords.csv
     - name: Remove repeat letter
       run: rm repeatLetterRemovedWordleWords.csv
