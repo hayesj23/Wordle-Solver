@@ -1,0 +1,10 @@
+name: updateWordleWords
+on:
+  push:
+    paths:
+      - 'allWords.csv'
+
+jobs:
+  run: rm wordleWords.csv
+  run: rm repeatLetterRemovedWordleWords.csv
+  run: python3 wordListFinder 0
