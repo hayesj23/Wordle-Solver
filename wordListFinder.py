@@ -4,17 +4,29 @@ from ntpath import join
 from os.path import exists
 import sys
 from turtle import pos
+import requests
+import pandas as pd
+import io
+
 
 from numpy import true_divide
 import wordleWordFilterer
 
+url = "https://raw.githubusercontent.com/hayesj23/Wordle-Solver/main/allWords.csv"
 
-if not exists('wordleWords.csv'):
+if not exists('wooordleWords.csv'):
     if not exists('allWords.csv'):
-        print("As 'wordleWords.csv' does not exist, allWords.csv must exist to run this script.\n")
-        print("Check that neither of these files have been deleted, moved, or renamed\nIf these files are needed,") 
-        print("'allWords.csv' can\n be found at 'https://github.com/hayesj23/Wordle-Solver/blob/main/allWords.csv'\n")
-        quit()
+        print ("download start!")
+        download = requests.get(url).content
+        print ("download complete!")
+        csvIn=io.StringIO(download.decode('utf-8'))
+        csvOut=open('allWords.csv', 'w')
+        wordWriter = csv.writer(csvOut, delimiter=' ', dialect=csv.excel)
+        wordReader = csv.reader(csvIn, dialect=csv.unix_dialect)
+        for row in wordReader:
+            word = str(''.join(row))
+            wordWriter.writerow([word])
+        csvOut.close()
     wordleWordFilterer.filterForWordleWords()
 #argv[1]==0 means filter for finding sets of words with no repeating letters. 
 # 1 means filter for most common letter starting words with repeat letters having their value lowered.
