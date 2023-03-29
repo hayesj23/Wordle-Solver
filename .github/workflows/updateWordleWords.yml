@@ -8,8 +8,10 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+    - name: change dir
+      run: cd ..
     - name: Print dir
-      run: pwd
+      run: ls -a
     - name: Remove wordle words
       run: rm wordleWords.csv
     - name: Remove repeat letter
