@@ -6,9 +6,9 @@ on:
 
 jobs:
   steps:
-    - name: Remove wordle words
-      run: rm wordleWords.csv
-    - name: Remove repeat letter
-      run: rm repeatLetterRemovedWordleWords.csv
-    - name: run wordListFinder to regenerate files
-      run: python3 wordListFinder.py 0
+  - name: Remove wordle words
+    run: rm wordleWords.csv
+  - name: Remove repeat letter
+    run: rm repeatLetterRemovedWordleWords.csv
+  - name: run wordListFinder to regenerate files
+    run: python3 wordListFinder.py 0
