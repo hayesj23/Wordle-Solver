@@ -21,7 +21,7 @@ filterOutRepeatLetters() reads wordleWords.csv (to cut down on processing time) 
 
 wordListFinder.py is the file that does the actual processing to help find the solution word. This is run based upon the arguments that are passed to it.
 
-python3 wordListFinder.py 0: Not yet implemented, intended to utilize wordleWordFilterer.py/filterOutRepeatLetters() and provide a list of 5 words that have no repeated letters, intended to be utilized for finding a starting word that is useful.
+python3 wordListFinder.py 0: Intended to utilize wordleWordFilterer.py/filterOutRepeatLetters() and provide a list of 5 words that have no repeated letters, intended to be utilized for finding a starting word that is useful.
 
 python3 wordListFinder.py 1: Filter for the words that fit the rules and use as many common letters from the english language as possible (the table used to prioritize letters is in wordleWordFilterer.py and is sourced from https://leancrew.com/all-this/2022/01/wordle-letters/) and while it does not eliminate repeated letter words it does deprioritize the popularity of the letter if it is repeated in the word. It is intended to give the best possible starting word. The biggest reason this is included in the project as an existing method is in the event of discovering a wordle appropriate word that is not included in allWords.csv that gets added to the file or a word is tried and wordle says it is not a valid word. (I have had this happen a few times in testing)
 

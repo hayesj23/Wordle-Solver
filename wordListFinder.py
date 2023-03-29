@@ -38,16 +38,27 @@ if int(sys.argv[1]) == 0:
     if not exists('repeatLetterRemovedWordleWords.csv'):
         wordleWordFilterer.filterOutRepeatLetters()
     csvIn=open('repeatLetterRemovedWordleWords.csv', 'r')
-    csvOut=open('result.csv', 'w')
-    wordWriter = csv.writer(csvOut, delimiter=',')
-    wordReader = csv.reader(csvIn)
-    word1 = ""
-    word2 = ""
-    word3 = ""
-    word4 = ""
-    word5 = ""
-    csvIn.close()
-    csvOut.close()
+    words = ["", "", "", "", ""]
+    for j in range(5):
+        csvIn=open('repeatLetterRemovedWordleWords.csv', 'r')
+        wordReader = csv.reader(csvIn)
+        currentScore = 0
+        currentBestWord = ""
+        for row in wordReader:
+            word = str(''.join(row))
+            if not word in words:
+                tempWord = ""
+                tempScore = 0
+                for i in word:
+                    letterScore = wordleWordFilterer.wordScore(i)
+                    tempScore = tempScore+letterScore
+                    tempWord+=str(i)
+                if tempScore>currentScore:
+                    currentScore = tempScore
+                    words[j] = tempWord
+        csvIn.close()
+    print("The 5 best first word options are:")
+    print(words[0]+", "+words[1]+", "+words[2]+", "+words[3]+", and "+words[4])
 if int(sys.argv[1]) == 1:
     csvIn=open('wordleWords.csv', 'r')
     wordReader = csv.reader(csvIn)
@@ -91,42 +102,27 @@ if int(sys.argv[1]) == 2:
     excludedLetters = letterReader.__next__()
     row = letterReader.__next__()
     knownLetterPositions = str(''.join(row))
-    pos0 = ""
-    pos1 = ""
-    pos2 = ""
-    pos3 = ""
-    pos4 = ""
-    check0 = False
-    check1 = False
-    check2 = False
-    check3 = False
-    check4 = False
+    posits = ["", "", "", "", ""]
+    check = [False, False, False, False, False]
+    
     if not knownLetterPositions[0] == '_':
-        check0 = True
-        pos0 = knownLetterPositions[0]
+        check[0] = True
+        posits[0] = knownLetterPositions[0]
     if not knownLetterPositions[1] == '_':
-        check1 = True
-        pos1 = knownLetterPositions[1]
+        check[1] = True
+        posits[1] = knownLetterPositions[1]
     if not knownLetterPositions[2] == '_':
-        check2 = True
-        pos2 = knownLetterPositions[2]
+        check[2] = True
+        posits[2] = knownLetterPositions[2]
     if not knownLetterPositions[3] == '_':
-        check3 = True
-        pos3 = knownLetterPositions[3]
+        check[3] = True
+        posits[3] = knownLetterPositions[3]
     if not knownLetterPositions[4] == '_':
-        check4 = True
-        pos4 = knownLetterPositions[4]
+        check[4] = True
+        posits[4] = knownLetterPositions[4]
     csvLettersIn.close()
-    score1 = 0
-    score2 = 0
-    score3 = 0
-    score4 = 0
-    score5 = 0
-    word1 = ""
-    word2 = ""
-    word3 = ""
-    word4 = ""
-    word5 = ""
+    scores = [0, 0, 0, 0, 0]
+    words = ["", "", "", "", ""]
     for row in wordReader:
         word = str(''.join(row))
         stop = False
@@ -141,20 +137,20 @@ if int(sys.argv[1]) == 2:
             if y in word:
                 stop = True
         if not stop:
-            if check0:
-                if not word[0] == pos0:
+            if check[0]:
+                if not word[0] == posits[0]:
                     stop = True
-            if check1:
-                if not word[1] == pos1:
+            if check[1]:
+                if not word[1] == posits[1]:
                     stop = True
-            if check2:
-                if not word[2] == pos2:
+            if check[2]:
+                if not word[2] == posits[2]:
                     stop = True
-            if check3:
-                if not word[3] == pos3:
+            if check[3]:
+                if not word[3] == posits[3]:
                     stop = True
-            if check4:
-                if not word[4] == pos4:
+            if check[4]:
+                if not word[4] == posits[4]:
                     stop = True
         if stop:
             continue
@@ -167,42 +163,42 @@ if int(sys.argv[1]) == 2:
             else:
                 tempScore += letterScore
                 tempWord+=str(i)
-        if tempScore>score5:
-            if tempScore>score1:
-                score5 = score4
-                score4 = score3
-                score3 = score2
-                score2 = score1
-                score1 = tempScore
-                word5 = word4
-                word4 = word3
-                word3 = word2
-                word2 = word1
-                word1 = word
-            elif tempScore>score2:
-                score5 = score4
-                score4 = score3
-                score3 = score2
-                score2 = tempScore
-                word5 = word4
-                word4 = word3
-                word3 = word2
-                word2 = word
-            elif tempScore>score3:
-                score5 = score4
-                score4 = score3
-                score3 = tempScore
-                word5 = word4
-                word4 = word3
-                word3 = word
-            elif tempScore>score4:
-                score5 = score4
-                score4 = tempScore
-                word5 = word4
-                word4 = word
+        if tempScore>scores[4]:
+            if tempScore>scores[0]:
+                scores[4] = scores[3]
+                scores[3] = scores[2]
+                scores[2] = scores[1]
+                scores[1] = scores[0]
+                scores[0] = tempScore
+                words[4] = words[3]
+                words[3] = words[2]
+                words[2] = words[1]
+                words[1] = words[0]
+                words[0] = word
+            elif tempScore>scores[1]:
+                scores[4] = scores[3]
+                scores[3] = scores[2]
+                scores[2] = scores[1]
+                scores[1] = tempScore
+                words[4] = words[3]
+                words[3] = words[2]
+                words[2] = words[1]
+                words[1] = word
+            elif tempScore>scores[2]:
+                scores[4] = scores[3]
+                scores[3] = scores[2]
+                scores[2] = tempScore
+                words[4] = words[3]
+                words[3] = words[2]
+                words[2] = word
+            elif tempScore>scores[3]:
+                scores[4] = scores[3]
+                scores[3] = tempScore
+                words[4] = words[3]
+                words[3] = word
             else:
-                score5 = tempScore
-                word5 = word
-    print("The 5 best next word options based upon the letters you've already guessed are:\n")
-    print(word1+", "+word2+", "+word3+", "+word4+", and "+word5+"\n")
+                scores[4] = tempScore
+                words[4] = word
+    print("The 5 best next word options based upon the letters you've already guessed are:")
+    print(words[0]+", "+words[1]+", "+words[2]+", "+words[3]+", and "+words[4])
     csvWordsIn.close()
