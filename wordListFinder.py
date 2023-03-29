@@ -13,7 +13,7 @@ if not exists('wordleWords.csv'):
     if not exists('allWords.csv'):
         print("As 'wordleWords.csv' does not exist, allWords.csv must exist to run this script.\n")
         print("Check that neither of these files have been deleted, moved, or renamed\nIf these files are needed,") 
-        print("'allWords.csv' can\n be found at 'https://www.dropbox.com/s/agxiiiw2k7twyc5/allWords.csv?dl=0'\n")
+        print("'allWords.csv' can\n be found at 'https://github.com/hayesj23/Wordle-Solver/blob/main/allWords.csv'\n")
         quit()
     wordleWordFilterer.filterForWordleWords()
 #argv[1]==0 means filter for finding sets of words with no repeating letters. 
@@ -65,7 +65,7 @@ if int(sys.argv[1]) == 2:
         wordWriter.writerow([])
         wordWriter.writerow(["_,_,_,_,_"])
         temp.close()
-        print("Please fill out 'usedLetters.csv' with row 1 being words known to be present in the final word\n")
+        print("Please fill out 'usedLetters.csv' with row 1 being letters known to be present in the final word\n")
         print("and row 2 being letters known not to be in the final word. Also fill out the third row for any letter locations that are known. Fill this out in the following format:\n")
         print("e,p,r,s\n")
         print("z,x,o\n")
