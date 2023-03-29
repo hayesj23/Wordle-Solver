@@ -5,6 +5,7 @@ on:
       - 'allWords.csv'
 
 jobs:
+  name: update words
   steps:
   - name: Remove wordle words
     run: rm wordleWords.csv
