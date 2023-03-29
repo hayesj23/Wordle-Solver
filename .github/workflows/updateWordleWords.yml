@@ -10,6 +10,7 @@ jobs:
     steps:
     - name: Update wordle words
       run: |
+        cd ..
         ls -a
         pwd
         cd ..
