@@ -8,14 +8,14 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Update wordle words
       run: |
-        cd ..
-        ls -a
-        pwd
-        cd ..
-        ls -a
-        pwd
         rm wordleWords.csv
         rm repeatLetterRemovedWordleWords.csv
         python3 wordListFinder.py 0
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+        git add .
+        git commit -m "generated"
+        git push
