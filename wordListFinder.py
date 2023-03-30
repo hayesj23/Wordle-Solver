@@ -3,9 +3,6 @@ from os.path import exists
 import sys
 import requests
 import io
-
-
-from numpy import true_divide
 import wordleWordFilterer
 
 url = "https://raw.githubusercontent.com/hayesj23/Wordle-Solver/main/allWords.csv"
