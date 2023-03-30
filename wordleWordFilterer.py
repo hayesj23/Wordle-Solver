@@ -1,5 +1,4 @@
 import csv
-from fileinput import close
 
 def filterForWordleWords():
     csvIn=open('allWords.csv', 'r')##Sourced from 'https://github.com/dwyl/english-words' using alpha words

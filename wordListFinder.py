@@ -1,11 +1,7 @@
 import csv
-from fileinput import close
-from ntpath import join
 from os.path import exists
 import sys
-from turtle import pos
 import requests
-import pandas as pd
 import io
 
 
